@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}
+rootProject.name = "plugin-1"
+include ':app'
+
+// 引入shadow的核心sdk源码，每个sdk源码都是单独的gradle构建，属于组合/复合构建方式。
+includeBuild 'dyFramework/sdk/coding'
+includeBuild 'dyFramework/sdk/core'
+includeBuild 'dyFramework/sdk/dynamic'
+include ':plugin-runtime'
+include ':plugin-loader'

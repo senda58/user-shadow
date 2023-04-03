@@ -1,0 +1,25 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// 这里定义
+buildscript {
+    loadVersions:
+    {// 读取versions.properties到ext中，供项目中直接用变量引用版本号
+        def versions_properties_path = 'buildScripts/gradle/versions.properties'
+        def versions = new Properties()
+        versions.load(file(versions_properties_path).newReader())
+        versions.forEach { key, value ->
+            ext.set(key, value)
+        }
+    }
+}
+plugins {
+    id 'com.android.application' version '7.2.0' apply false
+    id 'com.android.library' version '7.2.0' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//引入通用配置
+apply from: "buildScripts/gradle/common.gradle"
+apply from: "buildScripts/gradle/maven.gradle"
